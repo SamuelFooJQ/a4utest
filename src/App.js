@@ -1,25 +1,25 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { useForm } from 'react-hook-form';
 
 function App() {
+  const { register, handleSubmit, errors } =useForm();
+  const onSubmit = data => console.log(data);
+  console.log(errors);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <h1>Ice Cream Company Pte Ltd</h1>
+      <h3>Redeem your free ice cream here!</h3>
+      <input type="text" placeholder="Name" name="Name" ref={register({required: true, maxLength: 80})} />
+      <input type="text" placeholder="Email" name="Email" ref={register({required: true, pattern: /^\S+@\S+$/i})} />
+      <select name="Flavour" ref={register({ required: true })}>
+        <option value="Chocolate Ice Cream">Chocolate Ice Cream</option>
+        <option value="Strawberry Ice Cream">Strawberry Ice Cream</option>
+        <option value="Vanilla Ice Cream">Vanilla Ice Cream</option>
+      </select>
+
+      <input type="submit" />
+    </form>
   );
 }
 
