@@ -1,14 +1,20 @@
-import React from 'react';
-import './App.css';
-import { useForm } from 'react-hook-form';
-import { DateTime } from "luxon";
+import Head from 'next/head'
+import styles from '../styles/Home.module.css'
+import { useForm } from 'react-hook-form'
+import { DateTime } from 'luxon'
 
-function App() {
+export default function Home() {
   const { register, handleSubmit, errors } =useForm();
   const onSubmit = data => console.log(data);
   console.log(errors);
   return (
+    <>
+    <Head>
+        <title>Create Next App</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
     <form onSubmit={handleSubmit(onSubmit)}>
+      
       <h1>Ice Cream Company Pte Ltd</h1>
       <h3>Redeem your free ice cream here!</h3>
       <input type="text" placeholder="Name" name="Name" ref={register({required: "Please enter your name!", maxLength: 80})} />
@@ -22,7 +28,6 @@ function App() {
       <input type="submit" />
       <p>{DateTime.local().toString()}</p>
     </form>
+    </>
   );
 }
-
-export default App;
